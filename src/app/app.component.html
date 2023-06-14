@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+    <p>
+      <mat-toolbar>
+        <span>Global News 📰</span>
+      </mat-toolbar>
+    </p>
+  </header>
+  <div class="container-fluid">
+    <div class="menu">
+      <mat-form-field class="example-form-field">
+        <mat-label>Search by keyword</mat-label>
+        <input matInput #box type="text" [formControl]="searchByTopic" (keyUp)="getByTopic(box.value)">
+        <button *ngIf="box.value" matSuffix mat-icon-button aria-label="Clear" (click)="onClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="row gx-35">
+        <mat-label>Categories</mat-label>
+        <mat-select [(value)]="selected" [formControl]="getByCategory" #category>
+          <mat-option value="business">Business</mat-option>
+          <mat-option value="entertainment">Entertainment</mat-option>
+          <mat-option value="health">Health</mat-option>
+          <mat-option value="science">Science</mat-option>
+          <mat-option value="sports">Sports</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row align-items-start">
+      <div class="col-sm-3 col-md-6 col-lg-3 row gx-35" *ngFor="let a of articles">
+        <div class="card">
+          <img src="{{a.urlToImage}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{a.title}}</h5>
+            <br>
+            <a href="{{a.url}}" class="btn btn-outline-primary rounded-1 float-end" target="_blank">Read
+              More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
